@@ -2,7 +2,6 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
-
 const restList = [
   {
     info: {
@@ -511,36 +510,56 @@ const restList = [
   },
 ];
 
-
-
-
-
 const Body = () => {
-
-  const [filteredRestList, setFilteredRestList] = useState([]);
+  const [filteredRestList, setFilteredRestList] = useState(restList);
+  const [searchText, setSearchText] = useState("");
   useEffect(() => {
     fetchdata();
   }, []);
-
+useEffect(() => {
+  setFilteredRestList(restList);
+},[searchText]);
   const fetchdata = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139&lng=77.2090&page_type=DESKTOP_WEB_LISTING" 
-    );
-    const json = await data.json();
-    console.log(json);
-    const restaurants = json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants|| [];
-    setFilteredRestList(restaurants);
-    console.log(restaurants);
+    try {
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139&lng=77.2090&page_type=DESKTOP_WEB_LISTING"
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      const json = await response.json();
+      console.log(json);
+      const restaurants =
+        json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+      setFilteredRestList(restaurants);
+      console.log(restaurants);
+    } catch (error) {
+      setFilteredRestList(restList);
+      console.error("Error fetching data:", error);
+      setFilteredRestList(restList);
+    }
   };
 
-  // if(filteredRestList.length === 0) {
-  //   return <Shimmer />;
-  // }
+  const handleSearch = () => {
+    const filteredList = restList.filter((restaurant) =>
+      restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredRestList(filteredList);
+  };
+
   return (
     <div className="body">
       <div className="search-container">
-        <input type="text" placeholder="Search for food items" />
-        <button className="search-button">Search</button>
+        // ...existing code...
+        <input
+          type="text"
+          placeholder="Search for food items"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button className="search-button" onClick={handleSearch}>
+          Search
+        </button>
+        // ...existing code...
         <button
           className="4*Orless-button"
           onClick={() => {
@@ -560,10 +579,13 @@ const Body = () => {
       </div> */}
 
       <div className="restaurant-list">
-      {(filteredRestList.length === 0)?<Shimmer />:
-        filteredRestList.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resdata={restaurant} />
-        ))}
+        {filteredRestList.length === 0 ? (
+          <Shimmer />
+        ) : (
+          filteredRestList.map((restaurant) => (
+            <RestaurantCard key={restaurant.info.id} resdata={restaurant} />
+          ))
+        )}
       </div>
     </div>
   );
