@@ -1,7 +1,10 @@
-
-import {SWIGGY_LOGO} from "../utils/constants";
- 
+import { Link } from "react-router-dom";
+import { SWIGGY_LOGO } from "../utils/constants";
+import { useState } from "react";
 const Header = () => {
+
+  // console.log("Header Rendered with every rerender due to state change of its child component");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="header">
       <div className="logo-container">
@@ -9,10 +12,22 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+
+          <li><button className="login" onClick={() => setIsLoggedIn(!isLoggedIn)}>
+            {isLoggedIn ? "Logout" : "Login"}
+          </button></li>
+         
         </ul>
       </div>
     </div>
