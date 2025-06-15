@@ -526,7 +526,7 @@ useEffect(() => {
       );
       if (!response.ok) throw new Error("Network response was not ok");
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
       const restaurants =
         json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
@@ -549,7 +549,6 @@ useEffect(() => {
   return (
     <div className="body">
       <div className="search-container">
-        // ...existing code...
         <input
           type="text"
           placeholder="Search for food items"
@@ -559,7 +558,7 @@ useEffect(() => {
         <button className="search-button" onClick={handleSearch}>
           Search
         </button>
-        // ...existing code...
+        
         <button
           className="4*Orless-button"
           onClick={() => {
@@ -574,9 +573,6 @@ useEffect(() => {
         <h1 className="restaurant-list-title">Restaurant List</h1>
       </div>
 
-      {/* <div className="rst-list-header">
-        
-      </div> */}
 
       <div className="restaurant-list">
         {filteredRestList.length === 0 ? (
