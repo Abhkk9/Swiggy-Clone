@@ -83,7 +83,20 @@
         .restaurant-card:hover {
             transform: scale(1.02);
             transition: transform 0.2s;
-        }      
+        }     
+        
+   .user{
+    margin: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    /* box-sizing:; */
+    /* display: flex;
+    justify-content: center; */
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f0f0f0;
+   }     
   .shimmer-container {
     display: flex;
     flex-wrap: wrap;
