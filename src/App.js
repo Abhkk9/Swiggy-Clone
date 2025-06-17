@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import {createBrowserRouter, RouterProvider,Outlet} from "react-router-dom";
 
+const Instamart = React.lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
   return (
@@ -30,6 +31,13 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },{
+        path: "/instamart",
+        element: (
+          <React.Suspense fallback={<h1>Loading...</h1>}>
+            <Instamart />
+          </React.Suspense>
+        ),
       },
       {
         path: "/contact",
