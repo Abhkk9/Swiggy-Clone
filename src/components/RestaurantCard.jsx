@@ -1,7 +1,11 @@
+// import { Link } from "react-router-dom";
 const RestaurantCard = (props) => {
   // console.log(...props);
   return (
-    <div className="restaurant-card">
+   
+    // <Link to={`/restaurants/${props.resdata.info.id}`}>
+    
+    <div className="restaurant-card" >
       <div key={props.resdata.info.id} className="restaurant-item">
         <img
           src={
@@ -19,6 +23,7 @@ const RestaurantCard = (props) => {
         <p>Rating: {props.resdata.info.avgRatingString}</p>
       </div>
     </div>
+    // </Link>
   );
 };
 
