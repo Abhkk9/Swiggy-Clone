@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect ,useState} from "react";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 const RestaurantMenuCard = function () {
-  const { restid } = useParams();
-  const data = useRestaurantMenu(restid || "24207");
+  const { restId } = useParams();
+  const data = useRestaurantMenu(restId || "24207");
 
   return (data.length===0) ? (<Shimmer />):(
     <div>
-      <h1 className="text-2xl font-bold mb-4">
-        Recommended Items [{data.length}]
+      <h1 className="text-2xl font-bold text-center my-4 p-4">
+        Restaurant Menu for {data[0].restaurantName || "Unknown Restaurant"}
       </h1>
+      <h3 >
+        Recommended Items [{data.length}]
+      </h3>
       <div className="menu-items-container flex flex-wrap justify-center gap-6">
         {data.map((item) => (
           <div

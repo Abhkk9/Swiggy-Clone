@@ -15,6 +15,7 @@ const useRestaurantMenu = (restaurantId) => {
     const resdata=data.data.cards[4].groupedCard.cardGroupMap
       .REGULAR.cards[1].card.card.itemCards;
     const transformedMenu = resdata.map((item) => ({
+      restaurantName: data.data.cards[2].card.card.info.name,
       name: item.card.info.name,
       finalPrice: item.card.info.finalPrice,
       defaultPrice: item.card.info.defaultPrice,
