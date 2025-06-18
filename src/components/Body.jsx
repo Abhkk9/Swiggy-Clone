@@ -1,6 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+
 // import restList from "../utils/mockData/resList";
 
 const Body = () => {
@@ -23,7 +25,7 @@ const Body = () => {
       const json = await response.json();
       const restaurants =
           
-        json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
       setFilteredRestList(restaurants);
     } catch (error) {
@@ -39,30 +41,37 @@ const Body = () => {
     setFilteredRestList(filteredList);
   };
 
+  const handleTopRated = () => {
+    const filteredList = filteredRestList.filter(
+      (restaurant) => restaurant.info.avgRatingString >= "4.5"
+    );
+    setFilteredRestList(filteredList);
+  };
+
   return (
     <div className="body">
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search for food items"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <button className="search-button" onClick={handleSearch}>
-          Search
-        </button>
-
-        <button
-          className="4*Orless-button"
-          onClick={() => {
-            const filteredList = filteredRestList.filter(
-              (restaurant) => restaurant.info.avgRatingString >= "4.5"
-            );
-            setFilteredRestList(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+      <div className=" p-1  ">
+        <div className="flex flex-col sm:flex-row items-center gap-1 mb-3">
+          <input
+            type="text"
+            placeholder="Search for food items"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 w-64"
+          />
+          <button
+            className="px-5 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
+          <button
+            className="px-5 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+            onClick={handleTopRated}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
         <h1 className="restaurant-list-title">Restaurant List</h1>
       </div>
 
@@ -71,7 +80,14 @@ const Body = () => {
           <Shimmer />
         ) : (
           filteredRestList.map((restaurant) => (
+            
+            <Link
+              to={`/restaurants/${restaurant.info.id}`}
+              key={restaurant.info.id}
+            >
             <RestaurantCard key={restaurant.info.id} resdata={restaurant} />
+            </Link>
+
           ))
         )}
       </div>
