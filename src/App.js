@@ -5,7 +5,7 @@ import Body from "./components/Body";
 import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
-import RestaurantMenuCard from "./components/RestaurantMenuCard";
+import RestaurantPage from "./components/RestaurantPage";
 import {createBrowserRouter, RouterProvider,Outlet} from "react-router-dom";
 
 const Instamart = React.lazy(() => import("./components/Instamart"));
@@ -42,7 +42,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/restaurants/:restId",
-        element: <RestaurantMenuCard />,
+        element: <RestaurantPage />,
       },
       {
         path: "/contact",
