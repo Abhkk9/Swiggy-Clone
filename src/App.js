@@ -9,13 +9,13 @@ import RestaurantPage from "./components/RestaurantPage";
 import {createBrowserRouter, RouterProvider,Outlet} from "react-router-dom";
 
 const Instamart = React.lazy(() => import("./components/Instamart"));
-
+  
 const AppLayout = () => {
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+      <div className="app">
+        <Header />
+        <Outlet />
+      </div>
   );
 };
 

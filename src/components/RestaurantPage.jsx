@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 const RestaurantPage = function () {
   const { restId } = useParams();
+  const [isExpanded, setisExpanded] = React.useState(-1);
   const obj = useRestaurantMenu(restId || "24207");
   // obj is an object containing restaurant details and menu cards {resDetails ,resMenuCards}
 
@@ -24,6 +25,9 @@ const RestaurantPage = function () {
             
             
             <RestaurantMenuCard
+              index={index}
+              isExpanded={isExpanded}
+              setisExpanded={setisExpanded}
               key={item.card.card.categoryId}
               categoryName={item.card.card.title}
               categoryData={item.card.card.itemCards}
