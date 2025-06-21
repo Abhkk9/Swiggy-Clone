@@ -1,13 +1,15 @@
 import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import ThemeContext from "../utils/ThemeContext";
 
 // import restList from "../utils/mockData/resList";
 
 const Body = () => {
   const [filteredRestList, setFilteredRestList] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     fetchdata();
@@ -49,7 +51,7 @@ const Body = () => {
   };
 
   return (
-    <div className="body">
+    <div className={`body ${theme === "dark" ? "bg-gray-400 text-white" : ""}`}>
       <div className=" p-1  ">
         <div className="flex flex-col sm:flex-row items-center gap-1 mb-3">
           <input
