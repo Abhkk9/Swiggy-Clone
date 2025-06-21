@@ -2,11 +2,15 @@ import { Link } from "react-router-dom";
 import { SWIGGY_LOGO } from "../utils/constants";
 import { useContext, useState } from "react";
 import ThemeContext from "../utils/ThemeContext";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log("cartItems", cartItems);
+  
   return (
     <div
       className={`header ${
@@ -33,6 +37,15 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
+          <li></li>
+            <Link to="/cart">
+              Cart
+              {cartItems.length > 0 && (
+                <span className="ml-2 bg-red-500 text-white px-2 py-1 rounded-full">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
           <li>
             <button
               className="px-4 py-2 bg-blue-500 text-white rounded"

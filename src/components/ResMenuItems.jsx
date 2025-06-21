@@ -1,7 +1,14 @@
 import React from 'react'
 import {MENU_ITEM_IMAGE_API} from "../utils/constants";
+import { useDispatch } from 'react-redux';
+import { addItem } from '../utils/store/slices/cartSlice';
+
 function ResMenuItems(props) {
   const data = props.data;
+  const dispatch = useDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem(data));
+  }
   return (
     <div className="menu-item-card bg-white shadow-md rounded-lg p-3 m-2 flex items-center max-w-md">
       <div className="flex-1 flex flex-col justify-center space-y-2">
@@ -31,6 +38,7 @@ function ResMenuItems(props) {
         <button
           className="absolute left-1/2 -translate-x-1/2 bottom-2 bg-white text-green-600 text-center px-3 py-1 rounded-md shadow-md hover:bg-gray-400 transition text-sm font-medium"
           style={{ minWidth: "60px" }}
+          onClick={handleAddItem}
         >
           ADD
         </button>
@@ -40,3 +48,7 @@ function ResMenuItems(props) {
 }
 
 export default ResMenuItems
+
+// onClick={handleAddItem}
+// onClick={handleAddItem(data.name)}
+// onClick={() => handleAddItem(data.name)
