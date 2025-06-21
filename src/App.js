@@ -4,22 +4,27 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
+import Cart from "./components/Cart";
 import Error from "./components/Error";
 import RestaurantPage from "./components/RestaurantPage";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { ThemeProvider } from "./utils/ThemeContext"; 
+import { Provider } from "react-redux"; //provder  is a thing provided by react to // connect react with redux store
+import apStore from "./utils/store/appStore";
 
 const Instamart = React.lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
   return (
+    <Provider store={apStore}> 
     <ThemeProvider>
       <div className="app">
         <Header />
         <Outlet />
       </div>
     </ThemeProvider>
-  );
+    </Provider>
+  )
 };
 
 const appRouter = createBrowserRouter([
@@ -50,6 +55,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/Cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
