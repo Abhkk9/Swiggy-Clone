@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: rgb(255, 197, 142);
+    
     border:1px rgb(21, 20, 20);
   }
   .logo{
@@ -25,11 +25,11 @@
   }
   
     
-.body {
+/* .body {
     padding: 1rem;
     background-color: #f9f9f9;
     border: 1px black;
-  }
+  } */
 
 .restaurant-list-title {
     font-size: 1.5rem;
@@ -77,13 +77,14 @@
       }
       .restaurant-card p {
         font-size: 0.875rem;
-        color: #666;
+        /* color: #666; */
         margin: 0.5rem 0;
       }
       .restaurant-card {
         cursor: pointer;
       }
         .restaurant-card:hover {
+          color: #666;
             transform: scale(1.02);
             transition: transform 0.2s;
         }     

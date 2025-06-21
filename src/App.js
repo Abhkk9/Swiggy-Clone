@@ -1,26 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
-import Body from "./components/Body"; 
+import Body from "./components/Body";
 import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantPage from "./components/RestaurantPage";
-import {createBrowserRouter, RouterProvider,Outlet} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { ThemeProvider } from "./utils/ThemeContext"; 
 
 const Instamart = React.lazy(() => import("./components/Instamart"));
-  
+
 const AppLayout = () => {
   return (
+    <ThemeProvider>
       <div className="app">
         <Header />
         <Outlet />
       </div>
+    </ThemeProvider>
   );
 };
 
 const appRouter = createBrowserRouter([
-
   {
     path: "/",
     element: <AppLayout />,
@@ -32,7 +34,8 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
-      },{
+      },
+      {
         path: "/instamart",
         element: (
           <React.Suspense fallback={<h1>Loading...</h1>}>
@@ -49,8 +52,7 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
     ],
-    errorElement: <Error />
-    ,
+    errorElement: <Error />,
   },
 ]);
 
