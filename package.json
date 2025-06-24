@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "clone",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.2",
+    "jest": "^30.0.2",
+    "jest-environment-jsdom": "^30.0.2",
     "parcel": "^2.15.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17"
