@@ -4,3 +4,4 @@ dist
 tailwind.config.js
 .postcssrc
 /src/Logic
+/coverage
