@@ -3,17 +3,21 @@ import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import ThemeContext from "../utils/ThemeContext";
+import AddressContext from "../utils/AddressContext";
 
 // import restList from "../utils/mockData/resList";
 
 const Body = () => {
   const [filteredRestList, setFilteredRestList] = useState([]);
+  const [apiRestList, setapiRestList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const { theme } = useContext(ThemeContext);
+  const { selectedAddress } = useContext(AddressContext);
 
   useEffect(() => {
     fetchdata();
-  }, []);
+  }, [selectedAddress]); 
+
   useEffect(() => {
     setFilteredRestList(filteredRestList);
   }, [searchText]);
@@ -21,7 +25,7 @@ const Body = () => {
   const fetchdata = async () => {
     try {
       const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6139&lng=77.2090&page_type=DESKTOP_WEB_LISTING"
+        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${selectedAddress.lat}&lng=${selectedAddress.lng}&page_type=DESKTOP_WEB_LISTING`
       );
       if (!response.ok) throw new Error("Network response was not ok");
       const json = await response.json();
@@ -30,6 +34,7 @@ const Body = () => {
         json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
       setFilteredRestList(restaurants);
+      setapiRestList(restaurants);
     } catch (error) {
       setFilteredRestList([]);
       console.error("Error fetching data:", error);
@@ -37,7 +42,7 @@ const Body = () => {
   };
 
   const handleSearch = () => {
-    const filteredList = restList.filter((restaurant) =>
+    const filteredList = apiRestList.filter((restaurant) =>
       restaurant.info.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredRestList(filteredList);

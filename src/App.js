@@ -11,18 +11,21 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { ThemeProvider } from "./utils/ThemeContext"; 
 import { Provider } from "react-redux"; //provder  is a thing provided by react to // connect react with redux store
 import apStore from "./utils/store/appStore";
+import { AddressProvider } from "./utils/AddressContext";
 
 const Instamart = React.lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
   return (
-    <Provider store={apStore}> 
-    <ThemeProvider>
-      <div className="app">
-        <Header />
-        <Outlet />
-      </div>
-    </ThemeProvider>
+    <Provider store={apStore}>
+      <ThemeProvider>
+        <AddressProvider>
+          <div className="app">
+            <Header />
+            <Outlet />
+          </div>
+        </AddressProvider>
+      </ThemeProvider>
     </Provider>
   )
 };
